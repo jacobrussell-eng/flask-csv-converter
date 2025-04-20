@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CSV Converter</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <main>
+            <h1 style="text-decoration: underline;">CSV Converter</h1>
+            <table>
+                <h1> 
+                    {% for table in tables %} 
+                    <h2>{{ titles[loop.index] }}</h2>                             
+                    {{ table|safe }} 
+                    {% endfor %}
+                </h1>
+            </table>
+        </main>
+    </body>
+</html>

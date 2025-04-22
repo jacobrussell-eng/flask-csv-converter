@@ -5,3 +5,8 @@
 table {
     margin: 0 auto;
 }
+
+#file_upload {
+    display: none;
+    margin-top: 10px;
+}

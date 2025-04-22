@@ -8,6 +8,21 @@
     <body>
         <main>
             <h1 style="text-decoration: underline;">CSV Converter</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <label for="csv_file" id="csv_file"></label>
+                <select name="csv_source" id="csv_file" onchange="toggleFileInput()">
+                    <option value="" {% if not selected_source %} selected {% endif %}>-- Select a file --</option>
+                    <option value="upload" {% if selected_source == 'upload' %} selected {% endif %}>Upload (+)</option>
+                    {% for filename in csv_files %}
+                        <option value="{{ filename }}" {% if filename == selected_file %} selected {% endif %}>{{ filename }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Convert!">
+                <div id="file_upload">
+                    <label for="file">Upload CSV file:</label>
+                    <input type="file" name="file" id="file" accept=".csv">
+                </div>
+            </form>
             <table>
                 <h1> 
                     {% for table in tables %} 
@@ -17,5 +32,16 @@
                 </h1>
             </table>
         </main>
+        <script>
+            function toggleFileInput() {
+                const selectElement = document.getElementById('csv_file');
+                const fileInputDiv = document.getElementById('file_upload');
+                if (selectElement.value == 'upload') {
+                    fileInputDiv.style.display = 'block';
+                } else {
+                    fileInputDiv.style.display = 'none';
+                }
+            }
+        </script>
     </body>
 </html>

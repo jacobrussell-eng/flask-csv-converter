@@ -10,30 +10,29 @@
     </head>
     <body>
         <main>
-            <h1 style="text-decoration: underline;">CSV Converter</h1>
-            <form method="POST" enctype="multipart/form-data">
-                <label for="csv_file"></label>
-                <select name="csv_source" id="csv_file" onchange="toggleFileInput()">
-                    <option value="" {% if not selected_source and not uploaded_file %} selected {% endif %}>-- Select a file --</option>
-                    <option value="upload" {% if uploaded_file %} selected {% endif %}>Upload (+)</option>
-                    {% for filename in csv_files %}
-                        <option value="{{ filename }}" {% if filename == selected_file %} selected {% endif %}>{{ filename }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" value="Convert!">
-                <div id="file_upload" style="display: {% if request.form['csv_source'] == 'upload' %}block{% else %}none{% endif %};">
-                    <label for="file">Upload CSV file:</label>
-                    <input type="file" name="file" id="file" accept=".csv">
-                </div>
-            </form>
-            <table>
-                <h1> 
-                    {% for table in tables %} 
-                    <h2>{{ titles[loop.index] }}</h2>                             
+            <div id="banner">
+                <h1 style="text-decoration: underline; margin-top: 0.25em;">CSV Converter</h1>
+                <form method="POST" enctype="multipart/form-data">
+                    <label for="csv_file"></label>
+                    <select name="csv_source" id="csv_file" onchange="toggleFileInput()">
+                        <option value="" {% if not selected_source and not uploaded_file %} selected {% endif %}>-- Select a file --</option>
+                        <option value="upload" {% if uploaded_file %} selected {% endif %}>Upload (+)</option>
+                        {% for filename in csv_files %}
+                            <option value="{{ filename }}" {% if filename == selected_file %} selected {% endif %}>{{ filename }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Convert!">
+                    <div id="file_upload" style="display: {% if request.form['csv_source'] == 'upload' %}block{% else %}none{% endif %};">
+                        <label for="file">Upload CSV file:</label>
+                        <input type="file" name="file" id="file" accept=".csv">
+                    </div>
+                </form>
+            </div>
+            <p> 
+                {% for table in tables %} 
                     {{ table|safe }} 
-                    {% endfor %}
-                </h1>
-            </table>
+                {% endfor %}
+            </p>
         </main>
         <script>
             function toggleFileInput() {

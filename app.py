@@ -12,13 +12,17 @@ def get_csv_files():
 
 # Read the data from the sample csv file:
 def csv_to_html(csv_filepath):
-    try:
-        df = pd.read_csv(csv_filepath)
-        return df.to_html(index=False)
-    except FileNotFoundError:
-        return "<p>Error: CSV file not found.</p>"
-    except Exception as e:
-        return f"<p>Error reading CSV file: {e}</p>"
+    encodings = ['utf-8','cp1252','latin1']
+    for enc in encodings:
+        try:
+            df = pd.read_csv(csv_filepath, encoding=enc)
+            return df.to_html(index=False)
+        except UnicodeDecodeError:
+            continue
+        except FileNotFoundError:
+            return "<p>Error: CSV file not found.</p>"
+        except Exception as e:
+            return f"<p>Error reading CSV file: {e}</p>"
 
 # Route url:
 @app.route('/', methods=['GET','POST'])
@@ -33,11 +37,11 @@ def index():
         selected_source = request.form.get('csv_source', '')
         # Handle file upload:
         if selected_source == 'upload':
+            uploaded_file = True
             if 'file' in request.files:
                 file = request.files['file']
                 if file.filename != '' and file.filename.endswith('.csv'):
                     html_table = csv_to_html(file)  # Pass the file buffer directly
-                    uploaded_file = True
                 else:
                     html_table = "<p>Error: Please upload a valid CSV file.</p>"
             else:

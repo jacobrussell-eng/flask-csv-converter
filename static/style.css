@@ -2,14 +2,39 @@
     font-family: "Roboto Slab", Verdana, Geneva, Tahoma, sans-serif;
 }
 
+body { 
+    margin: 0;
+    background-color: HSL(122, 46%, 80%); 
+    /* background-color: #fff; */
+}
+
+main { 
+    margin: 10px;
+}
+
+#banner {
+    width: auto;
+    display: block;
+    z-index: 10;
+    /* border: 1px solid black;   */
+    box-shadow: 5px 5px 5px black;
+    padding: 5px 10px 15px;
+    background-color: #fff;;
+}
+
+#file_upload {
+    margin-top: 10px;
+}
+
 table {
     margin: 0 auto;
+    /* color: #fff; */
 }
 
 th {
     text-align: center;
 }
 
-#file_upload {
-    margin-top: 10px;
+td {
+    padding: 2px;
 }

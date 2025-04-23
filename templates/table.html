@@ -4,21 +4,24 @@
         <meta charset="utf-8">
         <title>CSV Converter</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
     </head>
     <body>
         <main>
             <h1 style="text-decoration: underline;">CSV Converter</h1>
             <form method="POST" enctype="multipart/form-data">
-                <label for="csv_file" id="csv_file"></label>
+                <label for="csv_file"></label>
                 <select name="csv_source" id="csv_file" onchange="toggleFileInput()">
-                    <option value="" {% if not selected_source %} selected {% endif %}>-- Select a file --</option>
-                    <option value="upload" {% if selected_source == 'upload' %} selected {% endif %}>Upload (+)</option>
+                    <option value="" {% if not selected_source and not uploaded_file %} selected {% endif %}>-- Select a file --</option>
+                    <option value="upload" {% if uploaded_file %} selected {% endif %}>Upload (+)</option>
                     {% for filename in csv_files %}
                         <option value="{{ filename }}" {% if filename == selected_file %} selected {% endif %}>{{ filename }}</option>
                     {% endfor %}
                 </select>
                 <input type="submit" value="Convert!">
-                <div id="file_upload">
+                <div id="file_upload" style="display: {% if request.form['csv_source'] == 'upload' %}block{% else %}none{% endif %};">
                     <label for="file">Upload CSV file:</label>
                     <input type="file" name="file" id="file" accept=".csv">
                 </div>
@@ -36,7 +39,7 @@
             function toggleFileInput() {
                 const selectElement = document.getElementById('csv_file');
                 const fileInputDiv = document.getElementById('file_upload');
-                if (selectElement.value == 'upload') {
+                if (selectElement.value === 'upload') {
                     fileInputDiv.style.display = 'block';
                 } else {
                     fileInputDiv.style.display = 'none';

@@ -1,12 +1,15 @@
 * {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Roboto Slab", Verdana, Geneva, Tahoma, sans-serif;
 }
 
 table {
     margin: 0 auto;
 }
 
+th {
+    text-align: center;
+}
+
 #file_upload {
-    display: none;
     margin-top: 10px;
 }

@@ -1,6 +1,6 @@
 # flask-csv-converter
  Converting Comma-Separated-Values (CSV) files into HTML tables using the Flask framework. 
- <img src="screenshot.png" alt="screenshot" width="100%" height="auto">
+ <img src="static/screenshot.png" alt="screenshot" width="100%" height="auto">
 
 ## Resources:
 Sample CSV Files - [datablist on GitHub](https://github.com/datablist/sample-csv-files)\
